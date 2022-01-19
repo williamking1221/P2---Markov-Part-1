@@ -5,25 +5,16 @@ This is the directions document for Project P2 Markov Part 1 in CompSci 201 at D
 
 
 ## Outline
-- [Background (Not necessary to complete assignment)](#background-not-necessary-to-complete-assignment)
-- [High-Level TODOs](#high-level-todos)
-- [Git](#starter-code-and-git)
-- [Pushing to Git](#pushing-to-git)
-- [Running SimpleWordGramDriver](#running-simplewordgramdriver)
-- [Overview of WordGram](#overview-of-wordgram)
-- [Implementing WordGram](#implementing-wordgram)
-- [WordGram Constructors and Methods](#wordgram-constructors-and-methods)
-    - [(1) Implement the Constructor](#1-implement-the-constructor)
-    - [(2) Implement and override method toString()](#2-implement-and-override-method-tostring)
-    - [(3) Implement and override method hashCode()](#3-implement-and-override-method-hashcode)
-    - [(4) Implement and override method equals()](#4-implement-and-override-method-equals)
-    - [(5) Implement the method length()](#5-implement-the-method-length)
-    - [(6) Implement the method shiftAdd()](#6-implement-the-method-shiftadd)
-- [JUnit Tests Explained](#junit-tests-explained)
-- [Submitting](#submitting)
-- [Reflect Form](#reflect-form)
-- [Analysis](#analysis)
-- [Grading](#grading)
+- [Background](#background)
+- [Starter Code and Using Git](#starter-code-and-using-git)
+- [Developing the `WordGram` Class](#developing-the-wordgram-class)
+    - [What is a `WordGram`](#what-is-a-wordgram)
+    - [Getting Started](#getting-started)
+    - [Implementing `WordGram` Constructor, `toString`, and `hashCode`](#implementing-wordgram-constructor-tostring-and-hashcode)
+    - [Implementing `equals`, `length`, and `shiftAdd`](#implementing-equals-length-and-shiftadd)
+- [JUnit Tests](#junit-tests)
+- [Benchmarking and Analysis](#benchmarking-and-analysis)
+- [Submitting, Reflect, Grading](#submitting-reflect-grading)
 
 
 ## Background
@@ -48,7 +39,7 @@ We'll be using Git and the installation of GitLab at [coursework.cs.duke.edu](ht
 **[This document details the workflow](https://coursework.cs.duke.edu/201-public-documentation/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.** We recommend that you read and follow the directions carefully while working on a project! While coding, we recommend that you periodically (perhaps when completing a method or small section) push your changes as explained in Section 5.
 
 
-## Developing and Testing the `WordGram` Class
+## Developing the `WordGram` Class
 
 ### What is a `WordGram`
 You will implement a class callsed `WordGram` that represents a sequence of words (represented as strings), just like a Java String represents a sequence of characters. Just as the Java String class is an immutable sequence of characters, the `WordGram` class you implement will be an immutable sequence of strings. Immutable means that once a WordGram object has been created, it cannot be modified. You cannot change the contents of a `WordGram` object. However, you can create a new WordGram from an existing `WordGram`.
@@ -167,6 +158,7 @@ Then the strings in the array `myWords` of `wg` can be compared to this object's
 <summary>Implement length()</summary>
 
 The `length()` method should return the order or size of the `WordGram` -- this is the number of words stored in the instance variable `myWords`.
+</details>
 
 
 <details>
@@ -185,49 +177,24 @@ then the method call `w.shiftAdd("lemon")` should return a new `WordGram` {"pear
 The call `w.shiftAdd(string)` is meant to be an analog of the call `s.substring(1).concat(char)` for a String object s.  
 
 Note: To implement shiftAdd you'll need to create a new `WordGram` object, say referenced by a local variable wg. You'll be able to assign values to the instance variables of this wg object directly since the shiftAdd method is in the `WordGram` class.
-</details>
-
-
-## JUnit Tests Explained
-<details>
-<summary>Click to Expand</summary>
-
-To test your `WordGram` class, you’re given testing code. This code tests individual methods in your class, such tests are called unit tests, and you'll need to use the standard JUnit unit-testing library with the WordgramTest.java file to test your implementation. In this assignment you'll be using JUnit 5. You should be able to run tests by running the `WordGramTest` class just like a normal class. If you get an error, you may need to include the appropriate library. Intellij will take care of that for you if you right click on the red Test code and add JUnit 5 as seen in the image below.
-
-<div align="center">
-<img width="300" height="200" src="p2-figures/P2-AddJUnit.png">
-</div>
-
-See more on how to import JUnit5 here: https://www.jetbrains.com/help/idea/testing.html#add-testing-libraries
-
-There are several tests in WordGramTest.java: `testEqualsTrue()`, `testEqualsFalse()` which check the correctness of .equals; `testHashEquals()` which checks the consistency of equals and hashing; `testHashDensity()` which checks the “performance” of the .hashCode method, and `testShift()` which checks, to some degree, the correctness of shiftAdd.
-
-<div align="center">
-<img width="600" height="200" src="p2-figures/P2-JUnitTests.png">
-</div>
-
-If the JUnit tests pass, you’ll get all green check marks as shown on the left below. Otherwise you’ll get an orange X mark — on the right below — and an indication of all the tests that fail. Choose one method to fix as needed and then go on to more tests. You'll see an explanation about why tests fail in the IntelliJ window to the right of the Test Results panel. You can use these test results to look at the tests and try to determine why your code fails.
 
 </details>
 
-## Submitting
-<details>
-<summary>Click to Expand</summary>
+After finishing the `shiftAdd` method (and others above), running `SimpleWordGramDriver` should show the following output.
+```
+gram = Computer Science is fun, length = 4, hash = 52791914
+gram = Science is fun sometimes, length = 4, hash = 1248130903
+```
 
-Push your code to Git. Do this often. You can use the autograder on Gradescope to test your code after you pass the JUnit tests. Note that you must complete the Reflect form, but you should NOT complete the reflect form until you're done with all the coding portion of the assignment. Since you may uncover bugs from the autograder, you should wait until you've completed debugging and coding before completing the reflect form.
 
-</details>
+## JUnit Tests
 
-### Reflect Form
-<details>
-<summary>Click to Expand</summary>
+To test your `WordGram` class, you’re given testing code. This code tests individual methods in your class, such tests are called unit tests, and you'll need to use the standard JUnit unit-testing library with the WordgramTest.java file to test your implementation. In this assignment you'll be using JUnit 5; the requisite files `jar` files should be included along with this project in a folder called `lib`. 
 
-Complete the reflect form linked here: https://do-compsci.com/201fall21-p2-reflect 
-</details>
+There are several tests in WordGramTest.java: `testEqualsTrue()`, `testEqualsFalse()` which check the correctness of .equals; `testHashEquals()` which checks the consistency of equals and hashing; `testHashDensity()` which checks the “performance” of the .hashCode method, and `testShift()` which checks, to a limited extent, the correctness of shiftAdd.
 
-## Analysis
-<details>
-<summary>Click to Expand</summary>
+
+## Benchmarking and Analysis
 
 <!-- WE SHOULD HAVE ANALYSIS DOCS! TODO: Make Google Docs with -->
 Answer the questions below once you have finished programming. You should write your answers in some text editor and then save into a PDF when you’re finished.  To change the size of the `WordGram` you're benchmarking/testing, you should change the WordGramBenchmark static instance variable WSIZE.  ** You'll submit a PDF to Gradescope in a separate P2: Analysis assignment.**
@@ -278,21 +245,22 @@ Read the article written by Duke alum Cade Metz: Metz, C. (2021). _Who is making
 
 Based on this article and your own thoughts, do you think algorithms can be biased? Explain.
 
-</details>
+
+## Submitting, Reflect, Grading
+
+Push your code to Git. Do this often. Once you have run and tested your completed program locally:
+
+1. Submit your code on gradescope to the autograder 
+2. Submit a PDF to Gradescope in the separate P2: Analysis assignment.
+3. Complete the reflect form linked here: TODO: ADD REFLECT FORM
 
 
-## Grading
-<details>
-<summary>Click to Expand</summary>
-
-For this program grading will be:
+For this project, grading will be:
 
 | Points | Grading Criteria |
 | ------ | ------ |
 | 14 | correctness of WordGram constructor and methods and other results reported by autograder, e.g., API.|
 | 6 |  Answers to analysis questions + Reflect |
-
-</details>
 
 <!-- ALL LINKS USED IN THIS DOCUMENT -->
 
