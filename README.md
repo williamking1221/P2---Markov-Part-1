@@ -1,4 +1,8 @@
-# P2: Markov Part I, Spring 2022
+# Project 2: Markov Part I, Spring 2022
+
+This is the directions document for Project P2 Markov Part 1 in CompSci 201 at Duke University, Spring 2022. Please follow the directions carefully while you complete the project. Please refer to the directions at https://coursework.cs.duke.edu/201spring22/p2-markov-part-1/ rather than any forks or local copies in the event that any changes are made to the document.
+
+
 
 ## Outline
 - [Background (Not necessary to complete assignment)](#background-not-necessary-to-complete-assignment)
@@ -22,88 +26,34 @@
 - [Grading](#grading)
 
 
-## Background (Not necessary to complete assignment)
+## Background
+
+Markov processes are widely used in Computer Science and in analyzing different forms of data. Part II of this assignment offers an occasionally amusing look at a *generative model* for creating realistic looking text in a data-driven way using a Markov Process. Part 1 (this project) begins building infrastructure for analyzing text in an object-oriented way by building out a `WordGram` class. 
+
+Generative models of the sort you will build are of great interest to researchers in artificial intelligence and machine learning generally, and especially those in the field of *natural language processing* (the use of algorithmic and statistical AI/ML techniques on human language). The most recent and power such text-generation model via statistical machine learning program is the [OpenAI GPT-3](https://www.theverge.com/2020/6/11/21287966/openai-commercial-product-text-generation-gpt-3-api-customers).
+
 <details>
-<summary>Click to Expand</summary>
-
-Markov processes are widely used in Computer Science and in analyzing different forms of data. Part II of this assignment offers an occasionally amusing look at text (it's more fun than counting words) by using a Markov process to generate random text based on a training text. 
-
-When run in reverse (we won't do that in this assignment), it's possible to identify the source of an unknown text based on frequency of letters and words. This process can be used to identify SPAM or to ascertain if Bacon wrote Romeo and Juliet.
-
-The most recent text-generation via statistical machine learning program is the [OpenAI GPT-3](https://www.theverge.com/2020/6/11/21287966/openai-commercial-product-text-generation-gpt-3-api-customers), you can read more using Google, but that's a start.  If you're on Facebook, you can use the what-would-i-say FB (or Android) app, described here http://what-would-i-say.com/about.html as "Technically speaking, it trains a **Markov Bot** based on mixture model of **bigram and unigram probabilities** derived from your past post history."
-
-You can also read about the so-called "Infinite Monkey Theorem" via its [Wikipedia entry](https://en.wikipedia.org/wiki/Infinite_monkey_theorem_in_popular_culture). 
-<div align="center">
-<img width="300 height="200" src="p2-figures/P2-monkey.png">
-</div>
-
+<summary>Historical details of this assignment (optional)</summary>
 
 This assignment has its roots in several places: a story named _Inflexible Logic_ now found in pages 91-98 from [_Fantasia Mathematica (Google Books)_](http://books.google.com/books?id=9Xw8tMEmXncC&printsec=frontcover&pritnsec=frontcover#PPA91,M1) and reprinted from a 1940 New Yorker story called by Russell Maloney. 
 The true mathematical roots are from a 1948 monolog by Claude Shannon, [A Mathematical Theory of Communication](https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxtaWNyb3JlYWRpbmcxMmZhbGx8Z3g6MThkYzkwNzcyY2U5M2U5Ng) which discusses in detail the mathematics and intuition behind this assignment. This assignment has its roots in a Nifty Assignment designed by Joe Zachary from U. Utah, assignments from Princeton designed by Kevin Wayne and others, and the work done at Duke starting with Owen Astrachan and continuing with Jeff Forbes, Salman Azhar, and the UTAs from Compsci 201.
 </details>
 
 
-## High-level TODOs
-<details>
-<summary>Click to Expand</summary>
+## Starter Code and Using Git
+You must have installed all software (Java, Git, VS Code) before you can complete the project.You can find the [directions for installation here](https://coursework.cs.duke.edu/201-public-documentation/resources-201/-/blob/main/installingSoftware.md).
 
-Run `SimpleWordGramDriver` to see that it runs, the output will be wrong, but you'll see that it runs as a Java program. Add your name as a comment at the top of the `WordGram.java` file, then push your changes to Git to confirm that Git works. You might need to include JUnit as part of the project accessible libraries to run SimpleWordGramDriver, see JUnit section for more.
+We'll be using Git and the installation of GitLab at [coursework.cs.duke.edu](https://coursework.cs.duke.edu). All code for classwork will be kept here. Git is software used for version control, and GitLab is an online repository to store code in the cloud using Git.
 
-Implement the constructor and `.toString` method for class `WordGram`. Run the driver program. Implement the methods `.hashCode`, `.equals`, and `.shiftAdd` in `WordGram` Test using `SimpleWordGramDriver` *and* using the JUnit tests in `WordGramTest.` If all tests pass and the SimpleWordGramDriver output matches expected output, then answer the questions in the analysis section by running the `WordGramBenchmark program` several times as asked for. Submit program on Gradescope via GitLab, and submit analysis also on Gradescope.
-</details>
+**[This document details the workflow](https://coursework.cs.duke.edu/201-public-documentation/resources-201/-/blob/main/projectWorkflow.md) for downloading the starter code for the project, updating your code on coursework using Git, and ultimately submitting to Gradescope for autograding.** We recommend that you read and follow the directions carefully while working on a project! While coding, we recommend that you periodically (perhaps when completing a method or small section) push your changes as explained in Section 5.
 
 
-## Starter Code and Git
-<details>
-<summary>Click to Expand</summary>
+## Developing and Testing the `WordGram` Class
 
-Fork, clone, and import the cloned project from the file system. Use this URL from the course GitLab site: https://coursework.cs.duke.edu/201fall21/P2-Markov-Part-1. **Be sure to fork first (see screen shot).** 
-<div align="center">
-<img width="300" height="50" src="p2-figures/P2-fork-first.png">
-</div>
+### What is a `WordGram`
+You will implement a class callsed `WordGram` that represents a sequence of words (represented as strings), just like a Java String represents a sequence of characters. Just as the Java String class is an immutable sequence of characters, the `WordGram` class you implement will be an immutable sequence of strings. Immutable means that once a WordGram object has been created, it cannot be modified. You cannot change the contents of a `WordGram` object. However, you can create a new WordGram from an existing `WordGram`.
 
-**After you have forked**, Clone the SSH URL as seen here: 
-<div align="center">
-<img width="300" height="200" src="p2-figures/P2-clone-ssh.png">
-</div>
-Then move (cd) into your IntelliJ workspace - the folder that you store your projects in (for most of you, this will be ~/IdeaProjects/ or whichever folder you're storing your projects in) - and verify that you're in the right location with pwd. You'll type git clone SSH_URL_COPIED to clone your repo onto your local computer. Then open from IntelliJ.
-
-### Pushing to Git
-
-When you make a series of changes you want to 'save', you'll push those changes to your GitHub repository. You should do this after major changes, certainly every hour or so of coding. You'll need to use the standard Git sequence to commit and push to GitHub:
-
-```
-git add .
-git commit -m 'a short description of your commit here'
-git push
-```
-
-</details>
-
-More detailed explanations on using Git can be found via the Using Git document [here][Using IntelliJ, Gradescope, and Git].
-
-## Running `SimpleWordGramDriver`
-<details>
-<summary>Click to Expand</summary>
-
-Be sure you can run the SimpleWordGramDriver. The output should be what's shown below: 
-```
-gram = null, length = 0, hash = 0
-gram = null, length = 0, hash = 0
-```
-**However, you may see errors generated from the WordGramTest program** because JUnit libraries are missing. If this happens, just right click on one of the red  JUnit pieces of code and add the JUnit 5.x library to your project; IntelliJ will add the libraries to your project's path.
-</details>
-
-
-## Overview of WordGram
-<details>
-<summary>Click to Expand</summary>
-
-Implement a class `WordGram` that represents a sequence of words or strings, just like a Java String represents a sequence of characters. As described below, implement the constructor and all stub-methods so you pass the provided tests and adhere to the design guidelines described below.
-
-Just as the Java String class is an immutable sequence of characters, the `WordGram` class you implement will be an immutable sequence of strings. Immutable means that once a WordGram object has been created, it cannot be modified. You cannot change the contents of a `WordGram` object. However, you can create a new WordGram from an existing `WordGram`. Strings are also immutable.
-
-The number of strings contained in a `WordGram` is sometimes called the *order* of the WordGram, and we sometimes call the `WordGram` an *order-k* WordGram, or a *k-gram* -- the term used in the Markov program you'll implement for Part II.  Some examples of order-3 `WordGram` objects include:
+The number of strings contained in a `WordGram` is sometimes called the *order* of the WordGram, and we sometimes call the `WordGram` an *order-k* WordGram, or a *k-gram* -- the term used in the Markov program you'll implement for Part 2.  Some examples of order-3 `WordGram` objects include:
 | | | |
 | --- | --- | --- |
 | "cat" | "sleeping" | "nearby" |
@@ -117,13 +67,9 @@ and
 
 You'll construct a `WordGram` object by passing as constructor arguments: an array, a starting index, and the size (or order) of the `WordGram.` You'll **store the strings in an array instance variable** by copying them from the array passed to the constructor.
 
-### Implementing `WordGram`
-<details>
-<summary>Click to Expand</summary>
 
-You're given an implementation of `WordGram.java` with stub (unimplemented) methods and a stub constructor. See the screenshot from IntelliJ to the right that indicates the required methods, constructors, and the three `private` instance variables you'll create. In the `WordGram` class you get in the starter code these methods are not correct, as you can see if you run the JUnit tests in `WordGramTest`. You'll follow these general steps to provide a correct implementation.
-
-1. Replace the stub/incomplete methods in `WordGram` with working versions. In particular, you should implement the following methods and constructor:
+### Getting Started
+You're given an outline of `WordGram.java` with stub (unimplemented) methods and a stub constructor. Your task will be to implement these methods in `WordGram` according to the specifications detailed below. In particular, you should implement the following methods and constructor:
     - The constructor `WordGram(String[] words, int index, int size)`
     - `toString()`
     - `hashCode()`
@@ -131,27 +77,26 @@ You're given an implementation of `WordGram.java` with stub (unimplemented) meth
     - `length()`
     - `shiftAdd(String last)`
 
-For `hashCode`, `equals`, and `toString`, your implementations should conform to the specifications as given in the [documentation for `Object`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html).
+For `hashCode`, `equals`, and `toString`, your implementations should conform to the specifications as given in the [documentation for `Object`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html). As you develop, you will test your implementation using the *JUnit* tests in `WordGramTest`. 
 
-Test these methods using the JUnit tests in `WordGramTest`. 
-</details>
+Before you start coding, be sure you can run the `SimpleWordGramDriver`. The output (before you have done anything to `WordGram` should be what's shown below.
+```
+gram = null, length = 0, hash = 0
+gram = null, length = 0, hash = 0
+```
 
-### `WordGram` Constructors and Methods
-<details>
-<summary>Click to Expand</summary>
 
-As you're implementing code for the first three methods: constructor, `.toString()`, and `.hashCode()`, you can use the program `SimpleWordGramDriver` to test what you've done, in addition to the JUnit tests described later in this document. The output of the program should be _different_ than when run after first cloning.
+### Implementing `WordGram` Constructor, `toString`, and `hashCode`
 
-After implementing the constructor and two methods the first line of the output should be as shown below, _*after implementing `.shiftAdd`*_, you'll get the second line of output as well.
-
+The first three methods you should implement are the constructor, `.toString()`, and `.hashCode()`. Once you have completed these, you can again run program `SimpleWordGramDriver`; you should get different output - in particular the first line should now be
 ```
 gram = Computer Science is fun, length = 4, hash = 52791914
-gram = Science is fun sometimes, length = 4, hash = 1248130903
 ```
 
-#### (1) Implement the Constructor
+You are also provided with JUnit tests (described later) that you can use to test your implementation. Expand the following sections for details on each of these methods.
+
 <details>
-<summary>Click to Expand</summary>
+<summary>Implement the Constructor</summary>
 
 The constructor for WordGram `public WordGram(String[] source, int start, int size)`
 should store `size` strings from the array `source`, starting at index `start` (of `source`) into a private `String` array instance variable `myWords` of the `WordGram` class. The array `myWords` should contain exactly `size` strings. There are three instance variables in `WordGram`:
@@ -178,9 +123,9 @@ The call `new WordGram(words,3,4)` should create this array `myWords` since the 
 | | | | |
 </details>
 
-#### (2) Implement and override method toString()
+
 <details>
-<summary>Click to Expand</summary>
+<summary>Implement and override toString()</summary>
 
 The `toString()` method should return a printable `String` representing all the strings stored in the `WordGram`. This should be a single `String` storing each of the values in instance variable `myWords` separated by a space. You can do this using the static [`String.join`](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#join-java.lang.CharSequence-java.lang.CharSequence...-) method with a first parameter of a single-space: `" "` and the second parameter the instance variable `myWords`. 
 
@@ -188,9 +133,9 @@ _**Don't recompute this `String` each time `toString` is called -- store the Str
 
 </details>
 
-#### (3) Implement and override method `hashCode()`
+
 <details>
-<summary>Click to Expand</summary>
+<summary>Implement and override hashCode()</summary>
 
 The `hashCode()` method should return an `int` value based on all the strings in instance variable `myWords`. A simple and efficient way to calculate a hash value is to call `this.toString()` and to use the hash-value of the resultant String created and returned by `this.toString() `_**-- you should use this method in calculating hash values for `WordGram` objects.**_
 
@@ -198,9 +143,13 @@ _**Don't recompute the hash value each time `hashCode` is called --**_ Since `my
 
 </details>
 
-#### (4) Implement and override method `equals()`
+
+### Implementing `equals`, `length`, and `shiftAdd`
+
+Next you should implement the remaining three methods of the `WordGram` class. Expand each section below for details.
+
 <details>
-<summary>Click to Expand</summary>
+<summary>Implement and override equals()</summary>
 
 The `equals()` method should return `true` when the parameter passed is a `WordGram` object with _**the same strings in the same order**_ as this object. Your code should test the object parameter with the `instanceof` operator to see if the parameter is a `WordGram.` You're given code that makes this test and returns false when the parameter is not a `WordGram` object.
 
@@ -213,17 +162,15 @@ Then the strings in the array `myWords` of `wg` can be compared to this object's
 
 </details>
 
-#### (5) Implement the method `length()`
+
 <details>
-<summary>Click to Expand</summary>
+<summary>Implement length()</summary>
 
 The `length()` method should return the order or size of the `WordGram` -- this is the number of words stored in the instance variable `myWords`.
 
-</details>
 
-#### (6) Implement the method `shiftAdd()`
 <details>
-<summary>Click to Expand</summary>
+<summary>Implement shiftAdd()</summary>
 
 If this `WordGram` has k entries then the `shiftAdd()` method should create and return a _**new**_ `WordGram` object, also with k entries, whose first k-1 entries are the same as the last k-1 entries of this `WordGram`, and whose last entry is the parameter `last`. Recall that `WordGram` objects are immutable and cannot be modified once created - **you must create a new WordGram object** in this method to return back to the user.
 
@@ -240,9 +187,6 @@ The call `w.shiftAdd(string)` is meant to be an analog of the call `s.substring(
 Note: To implement shiftAdd you'll need to create a new `WordGram` object, say referenced by a local variable wg. You'll be able to assign values to the instance variables of this wg object directly since the shiftAdd method is in the `WordGram` class.
 </details>
 
-</details>
-
-</details>
 
 ## JUnit Tests Explained
 <details>
