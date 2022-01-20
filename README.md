@@ -228,16 +228,16 @@ total # wgs = 177634
 
 **Answer the following questions about `WordGramBenchmark` for the analysis.**
 
-1. The static `benchmark` and `benchmarkShift` methods both generate the same result. How are they different? Specifically, answer the following about their differences: (a) Which method reads the entire file before creating any `WordGram`s and which creates `WordGram`s while reading the file? (b) Which method creates `WordGram`s by explicitly calling the Constructor every time and which one uses another method to implicitly create new `WordGram`? 
+1. The static `benchmark` and `benchmarkShift` methods both generate the same result. How are they different? Specifically, answer the following about their differences: (a) Which method reads the entire file before creating any `WordGram`s and which creates `WordGram`s while reading the file? (b) Which method creates `WordGram`s by explicitly calling the Constructor every time and which one uses another method to implicitly create new `WordGram`s? 
 2. Given that 177,634 total `WordGram`s were created with `WSIZE = 2` but there are only 117,181 values in the `Set` when we add all of these `WordGram`s, how many duplicate `WordGram`s were created?
-3.  Find the number of duplicate `WordGram`s created by running `WordGramBenchmark` with values of `WSIZE` ranging from 2 to 10. That is, fill out the chart that you can see below by expanding.
+3.  Find the number of duplicate `WordGram`s created by running `WordGramBenchmark` with values of `WSIZE` ranging from 2 to 10. That is, fill out the chart that you can see below by expanding. If you're stuck on the previous question, the chart shows you the correct answer for `WSIZE = 3`, which might help you work backwards to answer the previous question.
 
 <details>
 <summary>Expand for example chart</summary>
 
 | WSIZE | # duplicates|
 | --- | --- |
-|  2  |   60,453
+|  2  |   
 |  3  |   10,756
 |  4  |
 |  5  |
