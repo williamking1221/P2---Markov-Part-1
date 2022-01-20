@@ -189,14 +189,17 @@ gram = Science is fun sometimes, length = 4, hash = 1248130903
 
 ## JUnit Tests
 
-To test your `WordGram` class, you’re given testing code. This code tests individual methods in your class, such tests are called unit tests, and you'll need to use the standard JUnit unit-testing library with the WordgramTest.java file to test your implementation. In this assignment you'll be using JUnit 5; the requisite files `jar` files should be included along with this project in a folder called `lib`. 
+To test your `WordGram` class, you’re given testing code. This code tests individual methods in your class; such tests are called **unit tests**. We will talk more about these later in the course, but the basic idea is straightforward: A unit test specifies a given input and asserts an expected outcome of running a method, then runs your code to confirm that the expected outcome occurs. We provide these tests for you to **use** in this assignment, but you will not need to design any tests.
 
-There are several tests in WordGramTest.java: `testEqualsTrue()`, `testEqualsFalse()` which check the correctness of .equals; `testHashEquals()` which checks the consistency of equals and hashing; `testHashDensity()` which checks the “performance” of the .hashCode method, and `testShift()` which checks, to a limited extent, the correctness of shiftAdd.
+We use a major Java library called [**JUnit**](https://junit.org/junit5/) (specifically version 5) for creating and running these unit tests. It is not part of the standard Java API, so we have supplied the requisite files `JAR` files (Java ARchive files) along with this project in a folder called `lib` (you don't need to do anything with this).  
+
+We have included the tests you will use in the `WordgramTest.java` file. You should be able to run tests by running `WordGramTest.java` just like any other class with a `main` method. There are several tests in WordGramTest.java: `testEqualsTrue()`, `testEqualsFalse()` which check the correctness of `equals()`; `testHashEquals()` which checks the consistency of equals and hashing; `testHashDensity()` which checks the “performance” of the `hashCode()` method, and `testShift()` which checks, to a limited extent, the correctness of `shiftAdd()`. 
+
+The benefit of supplying these *local* (on your own machine) tests is twofold: (1) to introduce you to using unit tests yourself to locate bugs in the code, and (2) to allow you to catch bugs quickly without needing to rely on the (somewhat slower) Gradescope autograder until you are reasonably confident in your code.
 
 
 ## Benchmarking and Analysis
 
-<!-- WE SHOULD HAVE ANALYSIS DOCS! TODO: Make Google Docs with -->
 Answer the questions below once you have finished programming. You should write your answers in some text editor and then save into a PDF when you’re finished.  To change the size of the `WordGram` you're benchmarking/testing, you should change the WordGramBenchmark static instance variable WSIZE.  ** You'll submit a PDF to Gradescope in a separate P2: Analysis assignment.**
 
 **Q1: Running Benchmarks**
