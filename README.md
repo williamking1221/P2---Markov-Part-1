@@ -19,9 +19,9 @@ This is the directions document for Project P2 Markov Part 1 in CompSci 201 at D
 
 ## Background
 
-Markov processes are widely used in Computer Science and in analyzing different forms of data. Part II of this assignment offers an occasionally amusing look at a *generative model* for creating realistic looking text in a data-driven way using a Markov Process. Part 1 (this project) begins building infrastructure for analyzing text in an object-oriented way by building out a `WordGram` class. 
+Markov processes are widely used in Computer Science and in analyzing different forms of data. Part II of this assignment offers an occasionally amusing look at a *generative model* for creating realistic looking text in a data-driven way using a Markov Process. Part 1 (this project) begins building infrastructure for analyzing text in an object-oriented way by building out a [`WordGram` class](#what-is-a-wordgram). We will use the `WordGram`s in this project to perform some analysis on the text of several plays by William Shakespeare in the [Benchmarking and Analysis](#benchmarking-and-analysis) section after you have finished coding.
 
-Generative models of the sort you will build are of great interest to researchers in artificial intelligence and machine learning generally, and especially those in the field of *natural language processing* (the use of algorithmic and statistical AI/ML techniques on human language). The most recent and power such text-generation model via statistical machine learning program is the [OpenAI GPT-3](https://www.theverge.com/2020/6/11/21287966/openai-commercial-product-text-generation-gpt-3-api-customers).
+Generative models of the sort you will build in Markov Part 2, are of great interest to researchers in artificial intelligence and machine learning generally, and especially those in the field of *natural language processing* (the use of algorithmic and statistical AI/ML techniques on human language). The most recent and power such text-generation model via statistical machine learning program is the [OpenAI GPT-3](https://www.theverge.com/2020/6/11/21287966/openai-commercial-product-text-generation-gpt-3-api-customers).
 
 <details>
 <summary>Historical details of this assignment (optional)</summary>
@@ -204,15 +204,27 @@ The benefit of supplying these *local* (on your own machine) tests is twofold: (
 
 ## Benchmarking and Analysis
 
-Answer the questions below once you have finished programming. You should write your answers in some text editor and then save into a PDF when you’re finished.  To change the size of the `WordGram` you're benchmarking/testing, you should change the value of the `WordGramBenchmark` static instance variable `WSIZE`.  ** You'll submit a PDF to Gradescope in a separate P2: Analysis assignment.**
+Complete this after you finish programming; the benchmarking and analysis will require you to run code and read/reason about code. You should write your answers in some text editor and then save into a PDF when you’re finished.  To change the size of the `WordGram` you're benchmarking/testing, you should change the value of the `WordGramBenchmark` static instance variable `WSIZE`.  ** You'll submit a PDF to Gradescope in a separate P2: Analysis assignment.**
 
-**Q1: Running Benchmarks**
+`WordGramBenchmark.java` has a `main` method that analyzes several plays by William Shakespeare (the plain text of which are included in the `data/shakes/` folder). It does so using two different methods: `Benchmark` and `BenchmarkShift` on the text of each play, one at a time. These methods both read a text file, create `WordGram`s from the text, add the `WordGram`s they create to a `Set` of `WordGram`s (see the parameters), and return the total number of `WordGram`s created. These methods are two different ways of performing the same analysis; if you run the `main` method of `WordGramBenchmark` you should note that you get the same results printed twice. 
 
-`WordGramBenchmark.java` operates on a number of Shakespearean plays.
+Running `WordGramBenchmark` with `WSIZE = 2` should, for example, print something like the following:
 
-Run WordGramBenchmark for wordgrams of size 2-10 and record the number of WordGram values/objects that occur more than once as reported by the runs. For example, with WSIZE = 2, which generates 2-grams, the output of benchmark and benchmarkShift each indicates that the total # wordgrams generated is 177,634 and that the # unique wordgrams is 117,181.
+```
+benchmark time: 0.157, size = 117181
+total # wgs = 177634
 
-This means there are 177,634 - 117,181 = 60,453 duplicate WordGram values. Find these same numbers/values for other orders of k and complete the table below for different k-grams (in other words different values of `WSIZE`).
+benchmarkShift time: 0.157, size = 117181
+total # wgs = 177634
+```
+
+**The timings will be different on your machine and accross different runs.** The rest of the information should be the same, and indicates  that after running `Benchmark` or `BenchmarkShift` respectively, 177,634 total `WordGram`s were created, and after adding which one of those to a `Set`, the resulting size of the `Set` is 117,181.
+
+**Answer the following questions about `WordGramBenchmark` for the analysis.**
+
+1. The static `benchmark` and `benchmarkShift` methods both generate the same result. How are they different? Specifically, answer the following about their differences: (a) Which method reads the entire file before creating any `WordGram`s and which creates `WordGram`s while reading the file? (b) Which method creates `WordGram`s by explicitly calling the Constructor every time and which one uses another method to implicitly create new `WordGram`? 
+2. Given that 177,634 total `WordGram`s were created with `WSIZE = 2` but there are only 117,181 values in the `Set` when we add all of these `WordGram`s, how many duplicate `WordGram`s were created?
+3.  Find the number of duplicate `WordGram`s created by running `WordGramBenchmark` with values of `WSIZE` ranging from 2 to 10. That is, fill out the chart below.
 
 | WSIZE | # duplicates|
 | --- | --- |
@@ -226,16 +238,9 @@ This means there are 177,634 - 117,181 = 60,453 duplicate WordGram values. Find 
 |  9  |
 |  10 |
 
-**Q2: Explaining Benchmarks**
-
-Explain in your own words the conceptual differences between the benchmark and benchmarkShift methods. 
-Answer these questions: 
-
-(1) Explain wny the results of these methods should be the same in 
-terms of changes made to the `HashSet` parameter passed to each method.
-
-(2) What are the conceptual differences between the two
-benchmarking methods.
+4. Given what you observe in the table you filled out, Are the number of duplicates increasing or decreasing as a function of `WSIZE`? 
+5. Recall that `WSIZE` is the number of words in a `WordGram` and the `WordGramBenchmark` is creating `WordGram`s of that size/order by scanning the texts of plays. How would you explain the trend you observe that is, why is the number of duplicate `WordGram`s changing in the way you observe as a function of `WSIZE`?
+6. `WordGram`s like this are a useful way of breaking down a text into its constituent parts for subsequent analysis in a field called *natural language processing*, a subfield of artificial intelligence and machine learning. 
 
 **Q3: Biased Algorithms**
 
