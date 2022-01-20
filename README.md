@@ -44,7 +44,11 @@ We'll be using Git and the installation of GitLab at [coursework.cs.duke.edu](ht
 ### What is a `WordGram`
 You will implement a class callsed `WordGram` that represents a sequence of words (represented as strings), just like a Java String represents a sequence of characters. Just as the Java String class is an immutable sequence of characters, the `WordGram` class you implement will be an immutable sequence of strings. Immutable means that once a WordGram object has been created, it cannot be modified. You cannot change the contents of a `WordGram` object. However, you can create a new WordGram from an existing `WordGram`.
 
-The number of strings contained in a `WordGram` is sometimes called the *order* of the WordGram, and we sometimes call the `WordGram` an *order-k* WordGram, or a *k-gram* -- the term used in the Markov program you'll implement for Part 2.  Some examples of order-3 `WordGram` objects include:
+The number of strings contained in a `WordGram` is sometimes called the *order* of the WordGram, and we sometimes call the `WordGram` an *order-k* WordGram, or a *k-gram* -- the term used in the Markov program you'll implement for Part 2.  You can expand below to see some examples of order-3 `WordGram` objects.
+
+<details>
+<Summary>Expand to see examples of order-3 `WordGram`s</summary>
+
 | | | |
 | --- | --- | --- |
 | "cat" | "sleeping" | "nearby" |
@@ -55,6 +59,8 @@ and
 | --- | --- | --- |
 | "chocolate" | "doughnuts" | "explode" |
 | | | |
+
+</details> 
 
 You'll construct a `WordGram` object by passing as constructor arguments: an array, a starting index, and the size (or order) of the `WordGram.` You'll **store the strings in an array instance variable** by copying them from the array passed to the constructor.
 
@@ -224,7 +230,10 @@ total # wgs = 177634
 
 1. The static `benchmark` and `benchmarkShift` methods both generate the same result. How are they different? Specifically, answer the following about their differences: (a) Which method reads the entire file before creating any `WordGram`s and which creates `WordGram`s while reading the file? (b) Which method creates `WordGram`s by explicitly calling the Constructor every time and which one uses another method to implicitly create new `WordGram`? 
 2. Given that 177,634 total `WordGram`s were created with `WSIZE = 2` but there are only 117,181 values in the `Set` when we add all of these `WordGram`s, how many duplicate `WordGram`s were created?
-3.  Find the number of duplicate `WordGram`s created by running `WordGramBenchmark` with values of `WSIZE` ranging from 2 to 10. That is, fill out the chart below.
+3.  Find the number of duplicate `WordGram`s created by running `WordGramBenchmark` with values of `WSIZE` ranging from 2 to 10. That is, fill out the chart that you can see below by expanding.
+
+<details>
+<summary>Expand for example chart</summary>
 
 | WSIZE | # duplicates|
 | --- | --- |
@@ -237,6 +246,8 @@ total # wgs = 177634
 |  8  |
 |  9  |
 |  10 |
+
+</details>
 
 4. Given what you observe in the table you filled out, Are the number of duplicates increasing or decreasing as a function of `WSIZE`? 
 5. Recall that `WSIZE` is the number of words in a `WordGram` and the `WordGramBenchmark` is creating `WordGram`s of that size/order by scanning the texts of plays. How would you explain the trend you observe that is, why is the number of duplicate `WordGram`s changing in the way you observe as a function of `WSIZE`?
