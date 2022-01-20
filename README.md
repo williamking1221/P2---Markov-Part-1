@@ -69,6 +69,8 @@ You're given an outline of `WordGram.java` with stub (unimplemented) methods and
 - `length()`
 - `shiftAdd(String last)`
 
+There is also a `wordAt()` method, but it is already completed, you do not need to edit this method.
+
 For `hashCode`, `equals`, and `toString`, your implementations should conform to the specifications as given in the [documentation for `Object`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html). As you develop, you will test your implementation using the *JUnit* tests in `WordGramTest`. 
 
 Before you start coding, be sure you can run the `SimpleWordGramDriver`. The output (before you have done anything to `WordGram` should be what's shown below.
@@ -146,9 +148,9 @@ Next you should implement the remaining three methods of the `WordGram` class. E
 <details>
 <summary>Implement and override equals()</summary>
 
-The `equals()` method should return `true` when the parameter passed is a `WordGram` object with _**the same strings in the same order**_ as this object. Your code should test the object parameter with the `instanceof` operator to see if the parameter is a `WordGram.` You're given code that makes this test and returns false when the parameter is not a `WordGram` object.
+The `equals()` method should return `true` when the parameter passed is a `WordGram` object with _**the same strings in the same order**_ as this object. In general, the [Java API specification of `.equals()`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object) takes an `Object` type as input. The starter code provided uses the `instanceof` operator to see if the argument is indeed a `WordGram` and returns `false` if not.
 
-If the parameter `other` is a `WordGram` object, it can be cast to a `WordGram`, e.g., like this:
+If the parameter `other` is indeed a `WordGram` object then it can and should be cast to a `WordGram`, e.g., like this (you will need to add this to the starter code):
 ```
 WordGram wg = (WordGram) other;
 ```
@@ -168,7 +170,7 @@ The `length()` method should return the order or size of the `WordGram` -- this 
 <details>
 <summary>Implement shiftAdd()</summary>
 
-If this `WordGram` has k entries then the `shiftAdd()` method should create and return a _**new**_ `WordGram` object, also with k entries, whose first k-1 entries are the same as the last k-1 entries of this `WordGram`, and whose last entry is the parameter `last`. Recall that `WordGram` objects are immutable and cannot be modified once created - **you must create a new WordGram object** in this method to return back to the user.
+If this `WordGram` has k entries then the `shiftAdd()` method should create and return a _**new**_ `WordGram` object, also with k entries, whose *first* k-1 entries are the same as the *last* k-1 entries of this `WordGram`, and whose last entry is the parameter `last`. Recall that `WordGram` objects are immutable and cannot be modified once created - **this method must create a new WordGram object** and copy values correctly to return back to the user.
 
 For example, if `WordGram w` is 
 | | | |
@@ -176,11 +178,9 @@ For example, if `WordGram w` is
 | "apple" | "pear" | "cherry" |
 | | | | 
 
-then the method call `w.shiftAdd("lemon")` should return a new `WordGram` {"pear", "cherry", "lemon"}. Note that this new `WordGram` will not equal w.
+then the method call `w.shiftAdd("lemon")` should return a new `WordGram` containing {"pear", "cherry", "lemon"}. Note that this new `WordGram` will not equal w.
 
-The call `w.shiftAdd(string)` is meant to be an analog of the call `s.substring(1).concat(char)` for a String object s.  
-
-Note: To implement shiftAdd you'll need to create a new `WordGram` object, say referenced by a local variable wg. You'll be able to assign values to the instance variables of this wg object directly since the shiftAdd method is in the `WordGram` class.
+Note: To implement shiftAdd you'll need to create a new `WordGram` object. The code in the method will still be able to assign values to the private instance variables of that object directly since the `shiftAdd()` method is in the `WordGram` class.
 
 </details>
 
