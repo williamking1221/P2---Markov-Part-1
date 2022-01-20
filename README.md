@@ -60,13 +60,14 @@ You'll construct a `WordGram` object by passing as constructor arguments: an arr
 
 
 ### Getting Started
-You're given an outline of `WordGram.java` with stub (unimplemented) methods and a stub constructor. Your task will be to implement these methods in `WordGram` according to the specifications detailed below. In particular, you should implement the following methods and constructor:
-    - The constructor `WordGram(String[] words, int index, int size)`
-    - `toString()`
-    - `hashCode()`
-    - `equals(Object other)`
-    - `length()`
-    - `shiftAdd(String last)`
+You're given an outline of `WordGram.java` with stub (unimplemented) methods and a stub constructor. Your task will be to implement these methods in `WordGram` according to the specifications detailed below. In particular, you should implement the following
+
+- The constructor `WordGram(String[] words, int index, int size)`
+- `toString()`
+- `hashCode()`
+- `equals(Object other)`
+- `length()`
+- `shiftAdd(String last)`
 
 For `hashCode`, `equals`, and `toString`, your implementations should conform to the specifications as given in the [documentation for `Object`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html). As you develop, you will test your implementation using the *JUnit* tests in `WordGramTest`. 
 
@@ -84,22 +85,22 @@ The first three methods you should implement are the constructor, `.toString()`,
 gram = Computer Science is fun, length = 4, hash = 52791914
 ```
 
-You are also provided with JUnit tests (described later) that you can use to test your implementation. Expand the following sections for details on each of these methods.
+You are also provided with [JUnit tests](#junit-tests) that you can use to test your implementation. Expand the following sections for details on each of these methods.
 
 <details>
 <summary>Implement the Constructor</summary>
 
-The constructor for WordGram `public WordGram(String[] source, int start, int size)`
-should store `size` strings from the array `source`, starting at index `start` (of `source`) into a private `String` array instance variable `myWords` of the `WordGram` class. The array `myWords` should contain exactly `size` strings. There are three instance variables in `WordGram`:
+There are three instance variables in `WordGram`:
 ```
 private String[] myWords;
 private String myToString;
 private int myHash;
 ```
 
-_**You must give each of these instance variables a value in the constructor.**_ Instance variable values given to `myToString` and `myHash`  will change when you implement the methods `.toString()` and `.hashCode()`, respectively. **In the code you clone, these are given values, you'll need to add Strings to `myWords`.**
+The constructor for WordGram `public WordGram(String[] source, int start, int size)`
+should store `size` strings from the array `source`, starting at index `start` (of `source`) into the private `String` array instance variable `myWords` of the `WordGram` class. The array `myWords` should contain exactly `size` strings. 
 
-The constructor of a `WordGram` takes an array of strings as a parameter and copies `size` of these, starting at index `start`, into the instance variable `myWords`. For example, suppose parameter `words` is the array below, with "this" at index 0.
+For example, suppose parameter `words` is the array below, with "this" at index 0.
 
 | | | | | | | |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -112,15 +113,17 @@ The call `new WordGram(words,3,4)` should create this array `myWords` since the 
 | --- | --- | --- | --- |
 | "test" | "of" | "the" | "code"|
 | | | | |
+
+You do not need to change the default values assigned to the instance variables `myToString` and `myHash` in the constructor stub; these will change when you implement the methods `.toString()` and `.hashCode()`, respectively.
 </details>
 
 
 <details>
 <summary>Implement and override toString()</summary>
 
-The `toString()` method should return a printable `String` representing all the strings stored in the `WordGram`. This should be a single `String` storing each of the values in instance variable `myWords` separated by a space. You can do this using the static [`String.join`](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#join-java.lang.CharSequence-java.lang.CharSequence...-) method with a first parameter of a single-space: `" "` and the second parameter the instance variable `myWords`. 
+The `toString()` method should return a printable `String` representing all the strings stored in the `WordGram` instance variable `myWords`, each separated by a single blank space (that is, `" "`).
 
-_**Don't recompute this `String` each time `toString` is called -- store the String in instance variable `myToString`. For full credit your code**_ must only call `String.join` the first time `.toString()` is called and will then simply return the value stored in `myToString` on subsequent calls. You can compare the initial value of `myToString` to the default value `null` to see if you need to assign a value to it. Once `myString` is **not* null, you'll be able to use it rather than recomputing it. Note that `WordGram` objects are immutable, so we don’t need to worry about updating `myString` later.
+Don't recompute this `String` each time `toString()` is called -- instead, store the String in instance variable `myToString`. For full credit your code must only call calculate `myToString` the first time `toString()` is called; it should simply return the value stored in `myToString` on subsequent calls (remember `WordGram` is immutable, so it can't change on subsequent calls). To determine whether a given call to `toString()` is the first, you can compare to the default constructor value of `myToString`.
 
 </details>
 
@@ -128,10 +131,11 @@ _**Don't recompute this `String` each time `toString` is called -- store the Str
 <details>
 <summary>Implement and override hashCode()</summary>
 
-The `hashCode()` method should return an `int` value based on all the strings in instance variable `myWords`. A simple and efficient way to calculate a hash value is to call `this.toString()` and to use the hash-value of the resultant String created and returned by `this.toString() `_**-- you should use this method in calculating hash values for `WordGram` objects.**_
+The `hashCode()` method should return an `int` value based on all the strings in instance variable `myWords`. See the [Java API documentation](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()) for the design constraints to which a `hashCode()` method should conform. 
 
-_**Don't recompute the hash value each time `hashCode` is called --**_ Since `myHash` is set to a default value of 0 in the constructor, then you need to call `.toString().hashCode()` only if `myHash` is 0. Store this value in `myHash`, then just return `myHash` in subsequent calls if it isn't zero. As before, `WordGram` objects are immutable, so we don’t need to worry about updating `myHash` later. 
+You will implement `.equals()` later, but we will count two `WordGram` objects as equal if their `myWords` instance variables contain the same String values in the same order. In addition, note that the Java String class already has a good [`.hashCode()` method](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html#hashCode()) we can leverage. Use the `.hashCode()` of the String returned by `this.toString()` to implement this method.
 
+Don't recompute the hash value each time `.hashCode()` is called. Similar to `.toString()`, only compute it the first time `.hashCode()` is called, and store the result in the `myHash` instance variable (again noting that it cannot change later since `WordGram` objects are immutable). On subsequent calls, simply return `myHash`. Again you can check whether this is the first call by comparing to the default `myHash` value in the Constructor.
 </details>
 
 
