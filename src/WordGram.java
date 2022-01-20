@@ -1,4 +1,3 @@
-
 /**
  * A WordGram represents a sequence of strings
  * just as a String represents a sequence of characters
@@ -77,9 +76,7 @@ public class WordGram {
 	 * @return
 	 */
 	public WordGram shiftAdd(String last) {
-		WordGram wg = new WordGram(myWords,0,myWords.length);
 		// TODO: Complete this method
-
 		return wg;
 	}
 
