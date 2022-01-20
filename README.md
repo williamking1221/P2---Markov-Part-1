@@ -240,15 +240,11 @@ total # wgs = 177634
 
 4. Given what you observe in the table you filled out, Are the number of duplicates increasing or decreasing as a function of `WSIZE`? 
 5. Recall that `WSIZE` is the number of words in a `WordGram` and the `WordGramBenchmark` is creating `WordGram`s of that size/order by scanning the texts of plays. How would you explain the trend you observe that is, why is the number of duplicate `WordGram`s changing in the way you observe as a function of `WSIZE`?
-6. `WordGram`s like this are a useful way of breaking down a text into its constituent parts for subsequent analysis in a field called *natural language processing*, a subfield of artificial intelligence and machine learning. 
+6. `WordGram`s like this are a useful way of breaking down a text into its constituent parts for subsequent analysis in a field called *natural language processing*, a subfield of artificial intelligence (or AI) and machine learning (or ML) which are parts of computer science that develop data-driven algorithms and applications. Read this article written by Duke alum Cade Metz about the people behind these technologies: Metz, C. (2021). _Who is making sure the AI machines aren’t racist_. The New York Times, 15.
+    - https://www.nytimes.com/2021/03/15/technology/artificial-intelligence-google-bias.html
+    - (mirrored at Duke) https://courses.cs.duke.edu/compsci201/current/notes/ai-racist-nytimes.pdf
 
-**Q3: Biased Algorithms**
-
-Read the article written by Duke alum Cade Metz: Metz, C. (2021). _Who is making sure the AI machines aren’t racist_. The New York Times, 15.
-1. https://www.nytimes.com/2021/03/15/technology/artificial-intelligence-google-bias.html
-2. (mirrored at Duke) https://courses.cs.duke.edu/compsci201/current/notes/ai-racist-nytimes.pdf
-
-Based on this article and your own thoughts, do you think algorithms can be biased? Explain.
+Based on this article and your own thoughts, do you think algorithms can be biased? To what extent do you think it matters who develops algorithms? This question does not have a right/wrong answer, we are looking for a thoughtful reflection of one or two paragraphs.
 
 
 ## Submitting, Reflect, Grading
