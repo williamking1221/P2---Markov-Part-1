@@ -204,21 +204,15 @@ The benefit of supplying these *local* (on your own machine) tests is twofold: (
 
 ## Benchmarking and Analysis
 
-Answer the questions below once you have finished programming. You should write your answers in some text editor and then save into a PDF when you’re finished.  To change the size of the `WordGram` you're benchmarking/testing, you should change the WordGramBenchmark static instance variable WSIZE.  ** You'll submit a PDF to Gradescope in a separate P2: Analysis assignment.**
+Answer the questions below once you have finished programming. You should write your answers in some text editor and then save into a PDF when you’re finished.  To change the size of the `WordGram` you're benchmarking/testing, you should change the value of the `WordGramBenchmark` static instance variable `WSIZE`.  ** You'll submit a PDF to Gradescope in a separate P2: Analysis assignment.**
 
 **Q1: Running Benchmarks**
 
-Run WordGramBenchmark for wordgrams of size 2-10 and record
-the number of WordGram values/objects that occur more than
-once as reported by the runs. For example, with WSIZE = 2,
-which generates 2-grams, the output of benchmark and benchmarkShift
-each indicates that the total # wordgrams generated is 177,634
-and that the # unique wordgrams is 117,181
+`WordGramBenchmark.java` operates on a number of Shakespearean plays.
 
-This means there are 177,634 - 117,181 = 60,453 WordGram values that
-occur more than once. Find these same numbers/values for other orders
-of k and complete the table below for different k-grams (in other words different 
-values of `WSIZE`).
+Run WordGramBenchmark for wordgrams of size 2-10 and record the number of WordGram values/objects that occur more than once as reported by the runs. For example, with WSIZE = 2, which generates 2-grams, the output of benchmark and benchmarkShift each indicates that the total # wordgrams generated is 177,634 and that the # unique wordgrams is 117,181.
+
+This means there are 177,634 - 117,181 = 60,453 duplicate WordGram values. Find these same numbers/values for other orders of k and complete the table below for different k-grams (in other words different values of `WSIZE`).
 
 | WSIZE | # duplicates|
 | --- | --- |
@@ -234,8 +228,7 @@ values of `WSIZE`).
 
 **Q2: Explaining Benchmarks**
 
-Explain in your own words the conceptual differences between 
-the benchmark and benchmarkShift methods. 
+Explain in your own words the conceptual differences between the benchmark and benchmarkShift methods. 
 Answer these questions: 
 
 (1) Explain wny the results of these methods should be the same in 
