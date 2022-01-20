@@ -262,9 +262,9 @@ Based on this article and your own thoughts, do you think algorithms can be bias
 
 Push your code to Git. Do this often. Once you have run and tested your completed program locally:
 
-1. Submit your code on gradescope to the autograder 
+1. Submit your code on gradescope to the autograder.
 2. Submit a PDF to Gradescope in the separate P2: Analysis assignment.
-3. Complete the reflect form linked here: TODO: ADD REFLECT FORM
+3. Complete the [reflect form linked here](https://forms.office.com/Pages/ResponsePage.aspx?id=TsVyyzFKnk2xSh6jbfrJTErNjWEU70pGg_ytfEVEPi5UOUdYTU9UREpHQlRKRjNIVEVQOEZBQ0YwTi4u).
 
 
 For this project, grading will be:
