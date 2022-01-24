@@ -213,7 +213,17 @@ We have included the tests you will use in the `WordgramTest.java` file. You sho
 
 The benefit of supplying these *local* (on your own machine) tests is twofold: (1) to introduce you to using unit tests yourself to locate bugs in the code, and (2) to allow you to catch bugs quickly without needing to rely on the (somewhat slower) Gradescope autograder until you are reasonably confident in your code.
 
-**In order to run these files, click the [Test Explorer](https://code.visualstudio.com/docs/java/java-testing#_test-explorer) (beaker) icon on the left side of your screen (it should be the lowest icon on the panel) and click the Triangle to run all Tests. **
+**In order to run these files, click the [Test Explorer](https://code.visualstudio.com/docs/java/java-testing#_test-explorer) (beaker) icon on the left side of your screen (it should be the lowest icon on the panel) and click the Triangle to run all Tests.** Screenshots of where to run the tests and what the results should look like are shown in the expandable section below.
+
+<details>
+<summary>Expand here for JUnit screenshots</summary>
+
+<div align="center">
+  <img width="300" height="300" src="p2-figures/vscode_testing.png">
+  <img width="300" height="200" src="p2-figures/vscode_test_results.png">
+</div>
+
+</details>
 
 ## Benchmarking and Analysis
 
