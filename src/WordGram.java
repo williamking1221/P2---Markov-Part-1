@@ -23,7 +23,7 @@ public class WordGram {
 		myToString = null;
 		myHash = 0;
 
-		// TODO: initialize all instance variables
+		// TODO: initialize myWords - leave myToString/myHash alone.
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class WordGram {
 	 */
 	public WordGram shiftAdd(String last) {
 		// TODO: Complete this method
-		return wg;
+		return this;
 	}
 
 	@Override

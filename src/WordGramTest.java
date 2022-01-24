@@ -74,4 +74,29 @@ class WordGramTest {
         assertTrue(as.length() == a.length(),"shift add lengths");
         assertTrue(before.equals(after),"shift add immutable");
     }
+
+    /**
+     * Added Spring 2022.
+     * These tests check specifically that toString does not recompute a new String object 
+     * on successive toString calls and shiftAdd does not create a new WordGram object each time it is called.
+     * 
+     * If you fail testToStringRecomputation, make sure that you aren't 
+     */
+
+     @Test
+     public void testToStringRecomputation(){
+         String[] words = {"two", "oh", "one"};
+         WordGram test = new WordGram(words, 0, 3);
+         String one = test.toString();
+         String two = test.toString();
+         assertTrue(one == two, "Make sure that calling toString twice results in the same String with same memory location - see writeup");
+     }
+
+     @Test
+     public void testShiftAddRecomputation(){
+         String[] words = {"two", "oh", "one"};
+         WordGram test1 = new WordGram(words, 0, 3);
+         WordGram test2 = test1.shiftAdd("two");
+         assertFalse(test1 == test2, "Make sure that you are initializing a new WordGram within the shiftAdd method.");
+     }
 }
