@@ -80,7 +80,11 @@ class WordGramTest {
      * These tests check specifically that toString does not recompute a new String object 
      * on successive toString calls and shiftAdd does not create a new WordGram object each time it is called.
      * 
-     * If you fail testToStringRecomputation, make sure that you aren't 
+     * If you fail testToStringRecomputation, make sure that you aren't recalculating myToString each time you call toString - store the
+     * value once in the variable myToString!
+     * 
+     * If you fail testShiftAddRecomputation, make sure that you are making a new WordGram, independent of the WordGram you're modifying (this)
+     * and change only that WordGram!
      */
 
      @Test
