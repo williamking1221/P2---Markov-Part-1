@@ -1,8 +1,9 @@
+import java.util.*;
 /**
  * A WordGram represents a sequence of strings
  * just as a String represents a sequence of characters
  * 
- * @author YOUR NAME HERE
+ * @author William Joshua King
  *
  */
 public class WordGram {
@@ -23,7 +24,9 @@ public class WordGram {
 		myToString = null;
 		myHash = 0;
 
-		// TODO: initialize myWords - leave myToString/myHash alone.
+		for (int k = 0; k < size; k ++) {
+			myWords[k] = source[k+start];
+		}
 	}
 
 	/**
@@ -39,50 +42,60 @@ public class WordGram {
 	}
 
 	/**
-	 * Complete this comment
+	 * Returns the length of the WordGram
 	 * @return
 	 */
 	public int length(){
-		// TODO: change this
-		return 0;
+		return myWords.length;
 	}
 
 
 	/**
-	 * Complete appropriate comment here
+	 * Checks whether two WordGrams are equal to each other
 	 * @param other
 	 * @return
 	 */
 	@Override
 	public boolean equals(Object other) {
-		if (! (other instanceof WordGram) || other == null){
+		if (! (other instanceof WordGram) || other == null) {
 			return false;
 		}
-		// TODO: Complete this method
+		WordGram wg = (WordGram) other;
+		if (! Arrays.equals(this.myWords, wg.myWords)) {
+			return false;
+		}
 
 		return true;
 	}
 
 	@Override
 	public int hashCode(){
-		// TODO: complete this method: assign to myHash as needed
+		if (myHash == 0) {
+			myHash = this.toString().hashCode();
+		}
 		return myHash;
 	}
 	
 
 	/**
-	 * Create and complete this comment
+	 * Moves the index of the words by -1, taking out the first word, and adds another specified word to the end
 	 * @param last is last String of returned WordGram
 	 * @return
 	 */
 	public WordGram shiftAdd(String last) {
-		// TODO: Complete this method
-		return this;
+		WordGram wg = new WordGram(myWords, 0, myWords.length);
+		for (int k = 1; k < myWords.length; k++) {
+			wg.myWords[k-1] = this.myWords[k];
+		}
+		wg.myWords[wg.length() - 1] = last;
+		return wg;
 	}
 
 	@Override
 	public String toString(){
-		// TODO: Complete this method, assign to myToString as needed
+		if (myToString == null) {
+			myToString = String.join(" ", myWords);
+		}
 		return myToString;
 	}
 }
